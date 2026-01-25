@@ -1,0 +1,20 @@
+# .NET
+bin/
+obj/
+*.user
+*.suo
+.vs/
+
+# Android
+*.apk
+*.iml
+.gradle/
+local.properties
+.idea/
+
+# macOS
+.DS_Store
+
+# Database
+*.db
+*.sqlite
