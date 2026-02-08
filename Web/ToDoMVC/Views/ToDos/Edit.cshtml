@@ -1,0 +1,69 @@
+@model ToDoMVC.Models.ToDo
+
+@{
+    ViewData["Title"] = "Görevi Düzenle";
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+        <div class="card shadow">
+            <div class="card-header bg-warning text-dark">
+                <h3 class="mb-0">
+                    <i class="bi bi-pencil-square"></i> Görevi Düzenle
+                </h3>
+            </div>
+            <div class="card-body p-4">
+                <form asp-action="Edit" method="post">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" asp-for="Id" />
+                    <input type="hidden" asp-for="CreatedAt" />
+                    
+                    <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+
+                    <div class="mb-4">
+                        <label asp-for="Name" class="form-label fw-bold">
+                            <i class="bi bi-pencil"></i> Görev Adı
+                        </label>
+                        <input asp-for="Name" 
+                               class="form-control form-control-lg" 
+                               placeholder="Görev adını girin..." 
+                               autofocus />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-4">
+                        <div class="form-check form-switch">
+                            <input asp-for="IsCompleted" 
+                                   class="form-check-input" 
+                                   type="checkbox" 
+                                   role="switch">
+                            <label asp-for="IsCompleted" class="form-check-label">
+                                <i class="bi bi-check-circle"></i> Tamamlandı
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="alert alert-light border">
+                        <small class="text-muted">
+                            <i class="bi bi-info-circle"></i> 
+                            Oluşturulma Tarihi: <strong>@Model.CreatedAt.ToString("dd.MM.yyyy HH:mm")</strong>
+                        </small>
+                    </div>
+
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-warning btn-lg">
+                            <i class="bi bi-save"></i> Güncelle
+                        </button>
+                        <a asp-action="Index" class="btn btn-outline-secondary btn-lg">
+                            <i class="bi bi-arrow-left"></i> İptal
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

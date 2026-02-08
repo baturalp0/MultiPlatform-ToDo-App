@@ -1,0 +1,60 @@
+@model ToDoMVC.Models.ToDo
+
+@{
+    ViewData["Title"] = "Yeni Görev Ekle";
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+        <div class="card shadow">
+            <div class="card-header bg-primary text-white">
+                <h3 class="mb-0">
+                    <i class="bi bi-plus-circle"></i> Yeni Görev Ekle
+                </h3>
+            </div>
+            <div class="card-body p-4">
+                <form asp-action="Create" method="post">
+                    @Html.AntiForgeryToken()
+                    
+                    <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+
+                    <div class="mb-4">
+                        <label asp-for="Name" class="form-label fw-bold">
+                            <i class="bi bi-pencil"></i> Görev Adı
+                        </label>
+                        <input asp-for="Name" 
+                               class="form-control form-control-lg" 
+                               placeholder="Örn: Alışveriş yap, Kod yaz, Spor yap..." 
+                               autofocus />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-4">
+                        <div class="form-check form-switch">
+                            <input asp-for="IsCompleted" 
+                                   class="form-check-input" 
+                                   type="checkbox" 
+                                   role="switch">
+                            <label asp-for="IsCompleted" class="form-check-label">
+                                <i class="bi bi-check-circle"></i> Tamamlandı olarak işaretle
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-primary btn-lg">
+                            <i class="bi bi-save"></i> Kaydet
+                        </button>
+                        <a asp-action="Index" class="btn btn-outline-secondary btn-lg">
+                            <i class="bi bi-arrow-left"></i> İptal
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

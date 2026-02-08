@@ -3,6 +3,9 @@ using ToDoAPI.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.WebHost.UseUrls("http://0.0.0.0:5099");
+
+
 // Add services to the container.
 builder.Services.AddControllers();
 
